@@ -1,0 +1,6 @@
+{
+  "name": "RussiaConnect Website",
+  "description": "Premium marketing website for RussiaConnect, the peer-to-peer package delivery network connecting travellers and senders.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

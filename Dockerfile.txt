@@ -1,41 +1,29 @@
-# Stage 1: Build Stage
-FROM node:20-slim AS builder
+# Highly resilient single-stage build for Coolify/PaaS
+FROM node:20
+
+# Force development environment during build to ensure devDependencies are installed
+ENV NODE_ENV=development
 
 WORKDIR /app
-
-# Ensure devDependencies are installed even if build environment has NODE_ENV=production
-ENV NODE_ENV=development
 
 # Copy dependency files
 COPY package*.json ./
 
 # Install all dependencies (including devDependencies)
-RUN npm ci --include=dev
+RUN npm install
 
 # Copy source code files
 COPY . .
 
-# Build the application (runs vite build and bundle server.ts)
+# Build the application (runs vite build and bundles server.ts)
 RUN npm run build
 
-# Stage 2: Runtime Stage
-FROM node:20-slim AS runner
-
-WORKDIR /app
-
-# Install production-only dependencies
-COPY package*.json ./
-RUN npm ci --only=production
-
-# Copy built assets and server bundles from builder stage
-COPY --from=builder /app/dist ./dist
-
-# Set production environment variables
+# Set production environment variables for runtime
 ENV NODE_ENV=production
 ENV PORT=3000
 
-# Expose the configured port
+# Expose the port
 EXPOSE 3000
 
-# Run the bundled server file
+# Run the bundled server file directly
 CMD ["node", "dist/server.cjs"]

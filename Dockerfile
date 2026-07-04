@@ -4,7 +4,7 @@ WORKDIR /app
 
 # Install all deps (including devDeps needed for the build)
 COPY package.json ./
-RUN npm install
+RUN npm install --no-audit --no-fund
 
 # Copy source and build
 COPY . .
@@ -19,7 +19,7 @@ ENV PORT=3000
 
 # Only install production dependencies
 COPY package.json ./
-RUN npm install --omit=dev
+RUN npm install --omit=dev --no-audit --no-fund
 
 # Copy the built app from the builder stage
 COPY --from=builder /app/dist ./dist

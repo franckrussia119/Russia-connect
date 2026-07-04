@@ -422,38 +422,65 @@ export default function HomeView() {
           {/* Timeline steps */}
           {howItWorksTab === 'traveller' ? (
             <div className="space-y-12">
-              <div className="grid grid-cols-1 md:grid-cols-4 gap-8 relative">
-                {/* Horizontal timeline step 1 */}
-                <div className="bg-gray-50 border border-gray-100 rounded-2xl p-6 relative">
-                  <div className="w-10 h-10 rounded-full bg-[#0052CC]/10 text-[#0052CC] flex items-center justify-center mb-4 font-display font-bold">1</div>
-                  <h4 className="font-display font-bold text-lg text-[#0A0F1E] mb-2">Register Your Trip</h4>
-                  <p className="text-sm text-gray-500 leading-relaxed font-sans">
-                    {"Enter your airline flight route, travel date, available luggage space in kilograms, and accepted item types."}
-                  </p>
+              <div className="relative pt-4">
+                {/* The winding road */}
+                <svg className="hidden md:block absolute left-0 right-0 top-12 w-full h-6 pointer-events-none" preserveAspectRatio="none" viewBox="0 0 1000 24">
+                  <defs>
+                    <linearGradient id="roadTrav" x1="0" y1="0" x2="1" y2="0">
+                      <stop offset="0%" stopColor="#0052CC" />
+                      <stop offset="100%" stopColor="#FF6B35" />
+                    </linearGradient>
+                  </defs>
+                  <path d="M 40 12 C 200 -6, 300 30, 500 12 S 800 -6, 960 12" fill="none" stroke="url(#roadTrav)" strokeWidth="4" strokeDasharray="12 9" strokeLinecap="round" />
+                </svg>
+                {/* Origin marker */}
+                <div className="hidden md:flex absolute -left-1 top-9 flex-col items-center z-20">
+                  <div className="w-8 h-8 rounded-full bg-white border-2 shadow flex items-center justify-center text-sm" style={{ borderColor: '#0052CC' }}>✈️</div>
                 </div>
-                {/* Step 2 */}
-                <div className="bg-gray-50 border border-gray-100 rounded-2xl p-6 relative">
-                  <div className="w-10 h-10 rounded-full bg-[#0052CC]/10 text-[#0052CC] flex items-center justify-center mb-4 font-display font-bold">2</div>
-                  <h4 className="font-display font-bold text-lg text-[#0A0F1E] mb-2">Receive Requests</h4>
-                  <p className="text-sm text-gray-500 leading-relaxed font-sans">
-                    {"Senders along your exact flight corridor will search profiles, request matches, and post shipment guidelines."}
-                  </p>
+                {/* Destination marker */}
+                <div className="hidden md:flex absolute -right-1 top-9 flex-col items-center z-20">
+                  <div className="w-8 h-8 rounded-full bg-white border-2 shadow flex items-center justify-center text-sm" style={{ borderColor: '#FF6B35' }}>🏠</div>
                 </div>
-                {/* Step 3 */}
-                <div className="bg-gray-50 border border-gray-100 rounded-2xl p-6 relative">
-                  <div className="w-10 h-10 rounded-full bg-[#0052CC]/10 text-[#0052CC] flex items-center justify-center mb-4 font-display font-bold">3</div>
-                  <h4 className="font-display font-bold text-lg text-[#0A0F1E] mb-2">Agree & Collect</h4>
-                  <p className="text-sm text-gray-500 leading-relaxed font-sans">
-                    {"Message securely inside the app, confirm contents, negotiate prices, and take timestamped pickup photographs."}
-                  </p>
+                {/* Gliding package */}
+                <div className="hidden md:block absolute top-8 left-1/2 -translate-x-1/2 z-20 text-2xl select-none">📦</div>
+
+                <div className="grid grid-cols-1 md:grid-cols-4 gap-8 relative">
+                <div className="flex flex-col items-center text-center relative">
+                  <div className="w-16 h-16 rounded-full flex items-center justify-center font-display font-extrabold text-2xl text-white shadow-lg ring-4 ring-white z-10" style={{ background: 'linear-gradient(135deg, #0052CC, #FF6B35)' }}>1</div>
+                  <div className="mt-5 bg-gray-50 border border-gray-100 rounded-2xl p-5 w-full">
+                    <h4 className="font-display font-bold text-base text-[#0A0F1E] mb-2">Register Your Trip</h4>
+                    <p className="text-sm text-gray-500 leading-relaxed font-sans">
+                      {"Enter your airline flight route, travel date, available luggage space in kilograms, and accepted item types."}
+                    </p>
+                  </div>
                 </div>
-                {/* Step 4 */}
-                <div className="bg-gray-50 border border-gray-100 rounded-2xl p-6 relative">
-                  <div className="w-10 h-10 rounded-full bg-[#0052CC]/10 text-[#0052CC] flex items-center justify-center mb-4 font-display font-bold">4</div>
-                  <h4 className="font-display font-bold text-lg text-[#0A0F1E] mb-2">Deliver & Get Paid</h4>
-                  <p className="text-sm text-gray-500 leading-relaxed font-sans">
-                    {"Hand-off package to recipient, confirm unique PIN, and witness secure escrow payouts release instantly."}
-                  </p>
+                <div className="flex flex-col items-center text-center relative">
+                  <div className="w-16 h-16 rounded-full flex items-center justify-center font-display font-extrabold text-2xl text-white shadow-lg ring-4 ring-white z-10" style={{ background: 'linear-gradient(135deg, #0052CC, #FF6B35)' }}>2</div>
+                  <div className="mt-5 bg-gray-50 border border-gray-100 rounded-2xl p-5 w-full">
+                    <h4 className="font-display font-bold text-base text-[#0A0F1E] mb-2">Receive Requests</h4>
+                    <p className="text-sm text-gray-500 leading-relaxed font-sans">
+                      {"Senders along your exact flight corridor will search profiles, request matches, and post shipment guidelines."}
+                    </p>
+                  </div>
+                </div>
+                <div className="flex flex-col items-center text-center relative">
+                  <div className="w-16 h-16 rounded-full flex items-center justify-center font-display font-extrabold text-2xl text-white shadow-lg ring-4 ring-white z-10" style={{ background: 'linear-gradient(135deg, #0052CC, #FF6B35)' }}>3</div>
+                  <div className="mt-5 bg-gray-50 border border-gray-100 rounded-2xl p-5 w-full">
+                    <h4 className="font-display font-bold text-base text-[#0A0F1E] mb-2">Agree & Collect</h4>
+                    <p className="text-sm text-gray-500 leading-relaxed font-sans">
+                      {"Message securely inside the app, confirm contents, negotiate prices, and take timestamped pickup photographs."}
+                    </p>
+                  </div>
+                </div>
+                <div className="flex flex-col items-center text-center relative">
+                  <div className="w-16 h-16 rounded-full flex items-center justify-center font-display font-extrabold text-2xl text-white shadow-lg ring-4 ring-white z-10" style={{ background: 'linear-gradient(135deg, #0052CC, #FF6B35)' }}>4</div>
+                  <div className="mt-5 bg-gray-50 border border-gray-100 rounded-2xl p-5 w-full">
+                    <h4 className="font-display font-bold text-base text-[#0A0F1E] mb-2">Deliver & Get Paid</h4>
+                    <p className="text-sm text-gray-500 leading-relaxed font-sans">
+                      {"Hand-off package to recipient, confirm unique PIN, and witness secure escrow payouts release instantly."}
+                    </p>
+                  </div>
+                </div>
                 </div>
               </div>
 
@@ -478,38 +505,65 @@ export default function HomeView() {
             </div>
           ) : (
             <div className="space-y-12">
-              <div className="grid grid-cols-1 md:grid-cols-4 gap-8 relative">
-                {/* Step 1 */}
-                <div className="bg-gray-50 border border-gray-100 rounded-2xl p-6 relative">
-                  <div className="w-10 h-10 rounded-full bg-[#FF6B35]/10 text-[#FF6B35] flex items-center justify-center mb-4 font-display font-bold">1</div>
-                  <h4 className="font-display font-bold text-lg text-[#0A0F1E] mb-2">Post Your Package</h4>
-                  <p className="text-sm text-gray-500 leading-relaxed font-sans">
-                    {"Upload parcel details including weight, exact item description, deadline timeline, and matched budget."}
-                  </p>
+              <div className="relative pt-4">
+                {/* The winding road */}
+                <svg className="hidden md:block absolute left-0 right-0 top-12 w-full h-6 pointer-events-none" preserveAspectRatio="none" viewBox="0 0 1000 24">
+                  <defs>
+                    <linearGradient id="roadSend" x1="0" y1="0" x2="1" y2="0">
+                      <stop offset="0%" stopColor="#FF6B35" />
+                      <stop offset="100%" stopColor="#0052CC" />
+                    </linearGradient>
+                  </defs>
+                  <path d="M 40 12 C 200 -6, 300 30, 500 12 S 800 -6, 960 12" fill="none" stroke="url(#roadSend)" strokeWidth="4" strokeDasharray="12 9" strokeLinecap="round" />
+                </svg>
+                {/* Origin marker */}
+                <div className="hidden md:flex absolute -left-1 top-9 flex-col items-center z-20">
+                  <div className="w-8 h-8 rounded-full bg-white border-2 shadow flex items-center justify-center text-sm" style={{ borderColor: '#FF6B35' }}>✈️</div>
                 </div>
-                {/* Step 2 */}
-                <div className="bg-gray-50 border border-gray-100 rounded-2xl p-6 relative">
-                  <div className="w-10 h-10 rounded-full bg-[#FF6B35]/10 text-[#FF6B35] flex items-center justify-center mb-4 font-display font-bold">2</div>
-                  <h4 className="font-display font-bold text-lg text-[#0A0F1E] mb-2">Browse Travellers</h4>
-                  <p className="text-sm text-gray-500 leading-relaxed font-sans">
-                    {"Search verified travellers flying your exact route. View background rating checks and historical logs."}
-                  </p>
+                {/* Destination marker */}
+                <div className="hidden md:flex absolute -right-1 top-9 flex-col items-center z-20">
+                  <div className="w-8 h-8 rounded-full bg-white border-2 shadow flex items-center justify-center text-sm" style={{ borderColor: '#0052CC' }}>🏠</div>
                 </div>
-                {/* Step 3 */}
-                <div className="bg-gray-50 border border-gray-100 rounded-2xl p-6 relative">
-                  <div className="w-10 h-10 rounded-full bg-[#FF6B35]/10 text-[#FF6B35] flex items-center justify-center mb-4 font-display font-bold">3</div>
-                  <h4 className="font-display font-bold text-lg text-[#0A0F1E] mb-2">Connect & Agree</h4>
-                  <p className="text-sm text-gray-500 leading-relaxed font-sans">
-                    {"Negotiate pricing and safe hand-off details directly using secure in-app WhatsApp style chat channels."}
-                  </p>
+                {/* Gliding package */}
+                <div className="hidden md:block absolute top-8 left-1/2 -translate-x-1/2 z-20 text-2xl select-none">📦</div>
+
+                <div className="grid grid-cols-1 md:grid-cols-4 gap-8 relative">
+                <div className="flex flex-col items-center text-center relative">
+                  <div className="w-16 h-16 rounded-full flex items-center justify-center font-display font-extrabold text-2xl text-white shadow-lg ring-4 ring-white z-10" style={{ background: 'linear-gradient(135deg, #FF6B35, #0052CC)' }}>1</div>
+                  <div className="mt-5 bg-gray-50 border border-gray-100 rounded-2xl p-5 w-full">
+                    <h4 className="font-display font-bold text-base text-[#0A0F1E] mb-2">Post Your Package</h4>
+                    <p className="text-sm text-gray-500 leading-relaxed font-sans">
+                      {"Upload parcel details including weight, exact item description, deadline timeline, and matched budget."}
+                    </p>
+                  </div>
                 </div>
-                {/* Step 4 */}
-                <div className="bg-gray-50 border border-gray-100 rounded-2xl p-6 relative">
-                  <div className="w-10 h-10 rounded-full bg-[#FF6B35]/10 text-[#FF6B35] flex items-center justify-center mb-4 font-display font-bold">4</div>
-                  <h4 className="font-display font-bold text-lg text-[#0A0F1E] mb-2">Track & Confirm</h4>
-                  <p className="text-sm text-gray-500 leading-relaxed font-sans">
-                    {"Receive immediate flight updates. Payout releases from escrow vault only once recipient keys in the code."}
-                  </p>
+                <div className="flex flex-col items-center text-center relative">
+                  <div className="w-16 h-16 rounded-full flex items-center justify-center font-display font-extrabold text-2xl text-white shadow-lg ring-4 ring-white z-10" style={{ background: 'linear-gradient(135deg, #FF6B35, #0052CC)' }}>2</div>
+                  <div className="mt-5 bg-gray-50 border border-gray-100 rounded-2xl p-5 w-full">
+                    <h4 className="font-display font-bold text-base text-[#0A0F1E] mb-2">Browse Travellers</h4>
+                    <p className="text-sm text-gray-500 leading-relaxed font-sans">
+                      {"Search verified travellers flying your exact route. View background rating checks and historical logs."}
+                    </p>
+                  </div>
+                </div>
+                <div className="flex flex-col items-center text-center relative">
+                  <div className="w-16 h-16 rounded-full flex items-center justify-center font-display font-extrabold text-2xl text-white shadow-lg ring-4 ring-white z-10" style={{ background: 'linear-gradient(135deg, #FF6B35, #0052CC)' }}>3</div>
+                  <div className="mt-5 bg-gray-50 border border-gray-100 rounded-2xl p-5 w-full">
+                    <h4 className="font-display font-bold text-base text-[#0A0F1E] mb-2">Connect & Agree</h4>
+                    <p className="text-sm text-gray-500 leading-relaxed font-sans">
+                      {"Negotiate pricing and safe hand-off details directly using secure in-app WhatsApp style chat channels."}
+                    </p>
+                  </div>
+                </div>
+                <div className="flex flex-col items-center text-center relative">
+                  <div className="w-16 h-16 rounded-full flex items-center justify-center font-display font-extrabold text-2xl text-white shadow-lg ring-4 ring-white z-10" style={{ background: 'linear-gradient(135deg, #FF6B35, #0052CC)' }}>4</div>
+                  <div className="mt-5 bg-gray-50 border border-gray-100 rounded-2xl p-5 w-full">
+                    <h4 className="font-display font-bold text-base text-[#0A0F1E] mb-2">Track & Confirm</h4>
+                    <p className="text-sm text-gray-500 leading-relaxed font-sans">
+                      {"Receive immediate flight updates. Payout releases from escrow vault only once recipient keys in the code."}
+                    </p>
+                  </div>
+                </div>
                 </div>
               </div>
 

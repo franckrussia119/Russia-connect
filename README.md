@@ -1,20 +1,52 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://ai.google.dev/static/site-assets/images/share-ais-513315318.png" />
-</div>
+# Dr. Frank-Valere Yussa — Website
 
-# Run and deploy your AI Studio app
+Next.js 14 site for Dr. Frank-Valere Yussa, PhD (corporate lawyer, economist,
+investment banker).
 
-This contains everything you need to run your app locally.
+## Editing content
 
-View your app in AI Studio: https://ai.studio/apps/7c531765-8fc6-43ab-9383-498fef94024d
+- **Email, social links, languages, regions, testimonials:** `lib/site.ts`.
+  Social icons appear automatically once a link is filled in; the testimonials
+  section appears on the homepage once at least one testimonial is added.
+- **Page text:** each page lives in `app/<page>/page.tsx` (homepage: `app/page.tsx`).
+- **Colours and typography:** design tokens at the top of `app/globals.css`.
+- **Photos:** `public/images/`. All images are stored locally; nothing is
+  loaded from the old WordPress site.
 
-## Run Locally
+Fonts (Libre Caslon and Hanken Grotesk) are installed as npm packages and
+served from the site itself.
 
-**Prerequisites:**  Node.js
+## Contact form (email delivery)
 
+Messages are sent with [Resend](https://resend.com) (free tier: 3,000 emails
+a month). In Coolify → the application → Environment Variables, add:
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+| Variable | Required | Value |
+|---|---|---|
+| `RESEND_API_KEY` | yes | API key from resend.com → API Keys |
+| `CONTACT_TO_EMAIL` | no | Inbox that receives messages (defaults to the email in `lib/site.ts`) |
+| `CONTACT_FROM_EMAIL` | recommended | e.g. `Frank Yussa Website <contact@frankyussa.com>` — requires verifying the domain in Resend |
+
+Without `CONTACT_FROM_EMAIL`, Resend's test sender is used, which can only
+deliver to the email address you signed up to Resend with. Visitors receive
+an automatic confirmation email only when `CONTACT_FROM_EMAIL` is set.
+
+Until `RESEND_API_KEY` is set, the form tells visitors to email directly
+rather than pretending the message was sent.
+
+## Local development
+
+```bash
+export npm_config_legacy_peer_deps=true
+npm ci
+npm run dev
+```
+
+`package-lock.json` is committed on purpose: the Dockerfile uses `npm ci`,
+which requires it to match `package.json`.
+
+## Deploying on Coolify
+
+1. Application from this GitHub repo, build pack **Dockerfile**.
+2. Exposed port `3000`.
+3. Add the contact-form environment variables above.
